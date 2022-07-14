@@ -6,7 +6,7 @@ namespace CoffeeReviewApp.Interfaces
     {
         ICollection<Country> GetCountries();
         Country GetCountry(int id);
-        ICollection<Coffee> GetCoffeeFromACountry(int countryId);
+        ICollection<Coffee> GetCoffeesByCountry(int countryId);
         bool CountryExists(int id);
         bool CreateCountry(Country country);
         bool UpdateCountry(Country country);

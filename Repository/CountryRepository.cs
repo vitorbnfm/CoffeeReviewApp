@@ -42,7 +42,7 @@ namespace CoffeeReviewApp.Repository
             return _context.Countries.Where(c => c.Id == id).FirstOrDefault();
         }
 
-         public ICollection<Coffee> GetCoffeeFromACountry(int countryId)
+        public ICollection<Coffee> GetCoffeesByCountry(int countryId)
         {
             return _context.Coffees.Where(c => c.Country.Id == countryId).ToList();
         }
@@ -58,5 +58,7 @@ namespace CoffeeReviewApp.Repository
             _context.Update(country);
             return Save();
         }
+
+
     }
 }

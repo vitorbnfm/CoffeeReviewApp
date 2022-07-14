@@ -131,5 +131,21 @@ namespace CoffeeReviewApp.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{countryId}/coffees")]
+        public IActionResult GetCoffeesByACountry(int countryId)
+        {
+            if (!_countryRepository.CountryExists(countryId))
+                return NotFound();
+
+            var coffees = _mapper.Map<List<CoffeeDto>>(
+                _countryRepository.GetCoffeesByCountry(countryId));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(coffees);
+        }
+
     }
 }
