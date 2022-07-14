@@ -9,7 +9,6 @@ namespace CoffeeReviewApp.Dto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-       public CountryDto CountryDto { get; set; }
-        
+              
     }
 }

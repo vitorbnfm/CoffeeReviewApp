@@ -17,7 +17,7 @@ namespace CoffeeReviewApp.Repository
         public bool CreateCoffee(int categoryId, Coffee coffee)
         {
 
-            var category = _context.Categories.Where(c => c.Id == categoryId).FirstOrDefault();
+           var category = _context.Categories.Where(c => c.Id == categoryId).FirstOrDefault();
 
 
             var coffeeCategory = new CoffeeCategory()
@@ -26,6 +26,7 @@ namespace CoffeeReviewApp.Repository
                 Coffee = coffee,
             };
 
+            
             _context.Add(coffeeCategory);
 
             _context.Add(coffee);
@@ -81,7 +82,7 @@ namespace CoffeeReviewApp.Repository
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateCoffee(int categoryId, Coffee coffee)
+        public bool UpdateCoffee(int countryId, int categoryId, Coffee coffee)
         {
             _context.Update(coffee);
             return Save();

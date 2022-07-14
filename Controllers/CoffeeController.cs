@@ -12,16 +12,19 @@ namespace CoffeeReviewApp.Controllers
     {
         private readonly ICoffeeRepository _coffeeRepository;
         private readonly IReviewRepository _reviewRepository;
+        private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
 
         public CoffeeController(ICoffeeRepository coffeeRepository,
             IReviewRepository reviewRepository,
+            ICountryRepository countryRepository, 
             IMapper mapper)
         {
             _coffeeRepository = coffeeRepository;
             _reviewRepository = reviewRepository;
+            _countryRepository = countryRepository;
             _mapper = mapper;
-        }
+        } 
 
 
         [HttpGet]
@@ -74,7 +77,7 @@ namespace CoffeeReviewApp.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateCoffee([FromQuery] int catId, [FromBody] CoffeeDto coffeeCreate)
+        public IActionResult CreateCoffee([FromQuery] int countryId, [FromQuery] int categoryId, [FromBody] CoffeeDto coffeeCreate)
         {
             if (coffeeCreate == null)
                 return BadRequest(ModelState);
@@ -83,7 +86,7 @@ namespace CoffeeReviewApp.Controllers
 
             if (coffees != null)
             {
-                ModelState.AddModelError("", "already exists");
+                ModelState.AddModelError("", "coffee already exists");
                 return StatusCode(422, ModelState);
             }
 
@@ -92,8 +95,9 @@ namespace CoffeeReviewApp.Controllers
 
             var coffeeMap = _mapper.Map<Coffee>(coffeeCreate);
 
-      
-            if (!_coffeeRepository.CreateCoffee(catId, coffeeMap))
+            coffeeMap.Country = _countryRepository.GetCountry(countryId);
+
+            if (!_coffeeRepository.CreateCoffee(categoryId, coffeeMap))
             {
                 ModelState.AddModelError("", "Something went wrong while savin");
                 return StatusCode(500, ModelState);
@@ -106,7 +110,7 @@ namespace CoffeeReviewApp.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateCoffee(int coffeeId, [FromQuery] int catId, [FromBody] CoffeeDto updatedCoffee)
+        public IActionResult UpdateCoffee(int coffeeId, [FromQuery] int countryId, [FromQuery] int catId, [FromBody] CoffeeDto updatedCoffee)
         {
             if (updatedCoffee == null)
                 return BadRequest(ModelState);
@@ -122,7 +126,7 @@ namespace CoffeeReviewApp.Controllers
 
             var coffeeMap = _mapper.Map<Coffee>(updatedCoffee);
 
-            if (!_coffeeRepository.UpdateCoffee(catId, coffeeMap))
+            if (!_coffeeRepository.UpdateCoffee(countryId, catId, coffeeMap))
             {
                 ModelState.AddModelError("", "Something went wrong updating");
                 return StatusCode(500, ModelState);
@@ -160,6 +164,11 @@ namespace CoffeeReviewApp.Controllers
 
             return NoContent();
         }
+
+
+
+
+
     }
 }
 
