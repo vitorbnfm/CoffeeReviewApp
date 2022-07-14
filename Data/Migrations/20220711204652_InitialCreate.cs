@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CoffeeReviewApp.Migrations
+namespace CoffeeReviewApp.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -13,9 +13,9 @@ namespace CoffeeReviewApp.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,9 +26,9 @@ namespace CoffeeReviewApp.Migrations
                 name: "Countries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,10 +39,10 @@ namespace CoffeeReviewApp.Migrations
                 name: "Reviewers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,11 +53,11 @@ namespace CoffeeReviewApp.Migrations
                 name: "Coffees",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CountryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,8 +73,8 @@ namespace CoffeeReviewApp.Migrations
                 name: "CoffeeCategories",
                 columns: table => new
                 {
-                    CoffeeId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CoffeeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,13 +97,13 @@ namespace CoffeeReviewApp.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    ReviewerId = table.Column<int>(type: "int", nullable: true),
-                    CoffeeId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    Text = table.Column<string>(type: "TEXT", nullable: true),
+                    Rating = table.Column<int>(type: "INTEGER", nullable: false),
+                    ReviewerId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CoffeeId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
